@@ -1,10 +1,10 @@
 var app = {
-  directions:['right','bottom','left','top'],
+  
   player:{
     x:0,
     y:0,
-    direction:directions[0],
-  },
+    direction:'right'
+    },
   
   targetCell:{
     x:5,
@@ -52,13 +52,42 @@ var app = {
   },
 
   turnLeft:function(){
-    if(app.player.direction==='right'){
-      app.player.direction=up;
-    } else if(direction==='right'){
-      direction=top;
+    var oldClass=app.player.direction;
+    if(app.player.direction==="right"){
+      app.player.direction="top"
+    }else if(app.player.direction==="top"){
+      app.player.direction="left"
+    }else if(app.player.direction==="left"){
+      app.player.direction="bottom"
+    }else if(app.player.direction==="bottom"){
+      app.player.direction="right"
     }
-  
+    var playerHTMLElement=document.querySelector('.player')
+    playerHTMLElement.classList.remove(oldClass);
+    playerHTMLElement.classList.add(app.player.direction);
+
+  },
+  turnRight:function(){
+    var oldClass=app.player.direction;
+    if(app.player.direction==="right"){
+      app.player.direction="bottom"
+    }else if(app.player.direction==="bottom"){
+      app.player.direction="left"
+    }else if(app.player.direction==="left"){
+      app.player.direction="top"
+    }else if(app.player.direction==="top"){
+      app.player.direction="right"
+    }
+    
+    var playerHTMLElement=document.querySelector('.player')
+    playerHTMLElement.classList.remove(oldClass);
+    playerHTMLElement.classList.add(app.player.direction);
+  },
+
+  moveForward:function(){
+
   }
+
 };
 console.log(app.playerHTMLElement);
 console.log(app.targetCell);

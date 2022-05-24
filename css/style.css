@@ -37,3 +37,16 @@ body {
   border-color: transparent transparent transparent blue;
   margin: 20px;
 }
+
+.right{
+  transform: rotate(0deg);
+}
+.top{
+  transform: rotate(-90deg);
+}
+.bottom{
+  transform: rotate(90deg);
+}
+.left{
+  transform: rotate(180deg);
+}
