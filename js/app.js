@@ -3,7 +3,8 @@ var app = {
   player:{
     x:0,
     y:0,
-    direction:'right'
+    direction:'right',
+    move:0,
     },
   
   targetCell:{
@@ -68,6 +69,7 @@ var app = {
         app.player.direction="right"
       }
       app.redrawBoard()
+      app.player.move=(app.player.move)+1
     }
 
 
@@ -87,6 +89,7 @@ var app = {
       }
       
       app.redrawBoard()
+      app.player.move=(app.player.move)+1
     }
   },
 
@@ -97,27 +100,30 @@ var app = {
         if(app.player.x<5){
                 app.player.x=(app.player.x)+1;
         app.redrawBoard();
+        app.player.move=(app.player.move)+1
         }
       } else if (app.player.direction==="left"){
         if(app.player.x>0){
                 app.player.x=(app.player.x)-1;
         app.redrawBoard();
+        app.player.move=(app.player.move)+1
         }
       } else if (app.player.direction==="top"){
         if(app.player.y>0){
                 app.player.y=(app.player.y)-1;
         app.redrawBoard();
+        app.player.move=(app.player.move)+1
         }
       } else if (app.player.direction==="bottom"){
         if(app.player.y<3){
                 app.player.y=(app.player.y)+1;
         app.redrawBoard();
+        app.player.move=(app.player.move)+1
         }
       }
     }
   },
   listenKeyBoardEvents:function(e){
-    console.log(e.key)
     if(e.key==="ArrowUp"){
       app.moveForward()
     }else if(e.key==="ArrowLeft"){
@@ -130,7 +136,7 @@ var app = {
   isGameOver:function(){
     if(app.player.x===app.targetCell.x && app.player.y===app.targetCell.y){
       app.gameover='true';
-      alert(`Game Over! \n You Win`)
+      alert(`Game Over! \n You Win in : ${app.player.move} moves !`)
     }
   },
 
