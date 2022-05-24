@@ -27,6 +27,7 @@ var app = {
         if(j===app.player.x && i===app.player.y){
           var playerHTMLElement=document.createElement('div')
           playerHTMLElement.classList.add('player')
+          playerHTMLElement.classList.add(app.player.direction)
           cellHTMLElement.appendChild(playerHTMLElement)
         }
         rowHtmlElement.appendChild(cellHTMLElement)
@@ -62,9 +63,7 @@ var app = {
     }else if(app.player.direction==="bottom"){
       app.player.direction="right"
     }
-    var playerHTMLElement=document.querySelector('.player')
-    playerHTMLElement.classList.remove(oldClass);
-    playerHTMLElement.classList.add(app.player.direction);
+    app.redrawBoard()
 
   },
   turnRight:function(){
@@ -79,14 +78,32 @@ var app = {
       app.player.direction="right"
     }
     
-    var playerHTMLElement=document.querySelector('.player')
-    playerHTMLElement.classList.remove(oldClass);
-    playerHTMLElement.classList.add(app.player.direction);
+    app.redrawBoard()
   },
 
   moveForward:function(){
-
-  }
+    if (app.player.direction==="right"){
+      if(app.player.x<5){
+              app.player.x=(app.player.x)+1;
+      app.redrawBoard();
+      }
+    } else if (app.player.direction==="left"){
+      if(app.player.x>0){
+              app.player.x=(app.player.x)-1;
+      app.redrawBoard();
+      }
+    } else if (app.player.direction==="top"){
+      if(app.player.y>0){
+              app.player.y=(app.player.y)-1;
+      app.redrawBoard();
+      }
+    } else if (app.player.direction==="bottom"){
+      if(app.player.y<3){
+              app.player.y=(app.player.y)+1;
+      app.redrawBoard();
+      }
+    }
+  },
 
 };
 console.log(app.playerHTMLElement);
