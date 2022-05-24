@@ -50,6 +50,7 @@ var app = {
   console.log('init !');
   app.drawBoard()
   app.redrawBoard()
+  document.addEventListener('keyup',app.listenKeyBoardEvents)
   },
 
   turnLeft:function(){
@@ -104,6 +105,19 @@ var app = {
       }
     }
   },
+  listenKeyBoardEvents:function(e){
+    console.log(e.key)
+    if(e.key==="ArrowUp"){
+      app.moveForward()
+    }else if(e.key==="ArrowLeft"){
+      app.turnLeft()
+    }else if(e.key==="ArrowRight"){
+      app.turnRight()
+    }
+
+    
+  }
+    
 
 };
 console.log(app.playerHTMLElement);
