@@ -10,6 +10,7 @@ var app = {
     x:5,
     y:3,
   },
+  gameover:"false",
   // boardHtmlElement:'null',
   boardHtmlElement:document.querySelector('#board'),
   drawBoard:function(){  
@@ -31,9 +32,9 @@ var app = {
           cellHTMLElement.appendChild(playerHTMLElement)
         }
         rowHtmlElement.appendChild(cellHTMLElement)
-        
       }
-    }
+    } 
+    app.isGameOver()
   },
   clearBoard:function(){
     app.boardHtmlElement.innerHTML=" ";
@@ -42,7 +43,7 @@ var app = {
   redrawBoard:function(){
     app.clearBoard();
     app.drawBoard();
-  },
+    },
 
   init: function () {
   // app.boardHtmlElement=document.getElementById('board')
@@ -54,54 +55,64 @@ var app = {
   },
 
   turnLeft:function(){
-    var oldClass=app.player.direction;
-    if(app.player.direction==="right"){
-      app.player.direction="top"
-    }else if(app.player.direction==="top"){
-      app.player.direction="left"
-    }else if(app.player.direction==="left"){
-      app.player.direction="bottom"
-    }else if(app.player.direction==="bottom"){
-      app.player.direction="right"
+    if(app.gameover==='false')
+    {
+            var oldClass=app.player.direction;
+      if(app.player.direction==="right"){
+        app.player.direction="top"
+      }else if(app.player.direction==="top"){
+        app.player.direction="left"
+      }else if(app.player.direction==="left"){
+        app.player.direction="bottom"
+      }else if(app.player.direction==="bottom"){
+        app.player.direction="right"
+      }
+      app.redrawBoard()
     }
-    app.redrawBoard()
+
 
   },
   turnRight:function(){
-    var oldClass=app.player.direction;
-    if(app.player.direction==="right"){
-      app.player.direction="bottom"
-    }else if(app.player.direction==="bottom"){
-      app.player.direction="left"
-    }else if(app.player.direction==="left"){
-      app.player.direction="top"
-    }else if(app.player.direction==="top"){
-      app.player.direction="right"
+    if(app.gameover==='false')
+    {
+      var oldClass=app.player.direction;
+      if(app.player.direction==="right"){
+        app.player.direction="bottom"
+      }else if(app.player.direction==="bottom"){
+        app.player.direction="left"
+      }else if(app.player.direction==="left"){
+        app.player.direction="top"
+      }else if(app.player.direction==="top"){
+        app.player.direction="right"
+      }
+      
+      app.redrawBoard()
     }
-    
-    app.redrawBoard()
   },
 
   moveForward:function(){
-    if (app.player.direction==="right"){
-      if(app.player.x<5){
-              app.player.x=(app.player.x)+1;
-      app.redrawBoard();
-      }
-    } else if (app.player.direction==="left"){
-      if(app.player.x>0){
-              app.player.x=(app.player.x)-1;
-      app.redrawBoard();
-      }
-    } else if (app.player.direction==="top"){
-      if(app.player.y>0){
-              app.player.y=(app.player.y)-1;
-      app.redrawBoard();
-      }
-    } else if (app.player.direction==="bottom"){
-      if(app.player.y<3){
-              app.player.y=(app.player.y)+1;
-      app.redrawBoard();
+    if(app.gameover==='false')
+    {
+      if (app.player.direction==="right"){
+        if(app.player.x<5){
+                app.player.x=(app.player.x)+1;
+        app.redrawBoard();
+        }
+      } else if (app.player.direction==="left"){
+        if(app.player.x>0){
+                app.player.x=(app.player.x)-1;
+        app.redrawBoard();
+        }
+      } else if (app.player.direction==="top"){
+        if(app.player.y>0){
+                app.player.y=(app.player.y)-1;
+        app.redrawBoard();
+        }
+      } else if (app.player.direction==="bottom"){
+        if(app.player.y<3){
+                app.player.y=(app.player.y)+1;
+        app.redrawBoard();
+        }
       }
     }
   },
@@ -114,10 +125,16 @@ var app = {
     }else if(e.key==="ArrowRight"){
       app.turnRight()
     }
+  },
+  
+  isGameOver:function(){
+    if(app.player.x===app.targetCell.x && app.player.y===app.targetCell.y){
+      app.gameover='true';
+      alert(`Game Over! \n You Win`)
+    }
+  },
 
-    
-  }
-    
+
 
 };
 console.log(app.playerHTMLElement);
